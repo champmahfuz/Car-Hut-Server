@@ -127,7 +127,14 @@ async function run() {
             const result = await usersCollection.updateOne(filter, updateDoc);
             res.json(result);
         })
+        app.put('/OrderInfo/status', async (req, res) => {
+            const id = req.body;
+            const query = { _id: ObjectId(id) };
+            const updateDoc = { $set: { "status": 'approved' } };
+            const result = await orderCollection.updateOne(query, updateDoc);
+            res.json(result);
 
+        })
 
         // DELETE API
         app.delete('/products/:id', async (req, res) => {
